@@ -1,0 +1,159 @@
+#! /usr/local/Cellar/icarus-verilog/10.0/bin/vvp
+:ivl_version "10.0 (stable)" "(v10_0)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x7f90f5404fe0 .scope module, "or_gate" "or_gate" 2 2;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "a"
+    .port_info 1 /INPUT 16 "b"
+    .port_info 2 /OUTPUT 1 "out"
+L_0x7f90f54240d0 .functor OR 1, L_0x7f90f5423f50, L_0x7f90f5423ff0, C4<0>, C4<0>;
+L_0x7f90f5424280 .functor OR 1, L_0x7f90f54240d0, L_0x7f90f54241e0, C4<0>, C4<0>;
+v0x7f90f54036c0_0 .net *"_s1", 0 0, L_0x7f90f5423f50;  1 drivers
+v0x7f90f54226c0_0 .net *"_s3", 0 0, L_0x7f90f5423ff0;  1 drivers
+v0x7f90f5422760_0 .net *"_s4", 0 0, L_0x7f90f54240d0;  1 drivers
+v0x7f90f5422810_0 .net *"_s7", 0 0, L_0x7f90f54241e0;  1 drivers
+o0x1029950c8 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f90f54228c0_0 .net "a", 15 0, o0x1029950c8;  0 drivers
+o0x1029950f8 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f90f54229b0_0 .net "b", 15 0, o0x1029950f8;  0 drivers
+v0x7f90f5422a60_0 .net "out", 0 0, L_0x7f90f5424280;  1 drivers
+L_0x7f90f5423f50 .part o0x1029950c8, 0, 1;
+L_0x7f90f5423ff0 .part o0x1029950c8, 1, 1;
+L_0x7f90f54241e0 .part o0x1029950c8, 2, 1;
+S_0x7f90f5406690 .scope module, "testbench" "testbench" 3 5;
+ .timescale 0 0;
+v0x7f90f5423130_0 .var "a", 15 0;
+v0x7f90f54231e0_0 .var "b", 15 0;
+v0x7f90f5423290_0 .net "gate_output", 0 0, L_0x7f90f5424530;  1 drivers
+S_0x7f90f5422b30 .scope module, "nor_g" "nor_gate" 3 13, 2 11 0, S_0x7f90f5406690;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "a"
+    .port_info 1 /INPUT 16 "b"
+    .port_info 2 /OUTPUT 1 "y"
+L_0x7f90f5424390 .functor OR 16, v0x7f90f5423130_0, v0x7f90f54231e0_0, C4<0000000000000000>, C4<0000000000000000>;
+L_0x7f90f5424480 .functor NOT 16, L_0x7f90f5424390, C4<0000000000000000>, C4<0000000000000000>, C4<0000000000000000>;
+v0x7f90f5422d40_0 .net *"_s0", 15 0, L_0x7f90f5424390;  1 drivers
+v0x7f90f5422e00_0 .net *"_s2", 15 0, L_0x7f90f5424480;  1 drivers
+v0x7f90f5422eb0_0 .net "a", 15 0, v0x7f90f5423130_0;  1 drivers
+v0x7f90f5422f70_0 .net "b", 15 0, v0x7f90f54231e0_0;  1 drivers
+v0x7f90f5423020_0 .net "y", 0 0, L_0x7f90f5424530;  alias, 1 drivers
+L_0x7f90f5424530 .part L_0x7f90f5424480, 0, 1;
+S_0x7f90f5407220 .scope module, "xnor_gate" "xnor_gate" 2 31;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 1 "X"
+    .port_info 1 /INPUT 16 "A"
+    .port_info 2 /INPUT 16 "B"
+L_0x7f90f5424650 .functor XNOR 1, L_0x7f90f54246c0, L_0x7f90f54247a0, C4<0>, C4<0>;
+o0x102995368 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f90f5423360_0 .net "A", 15 0, o0x102995368;  0 drivers
+o0x102995398 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f90f54233f0_0 .net "B", 15 0, o0x102995398;  0 drivers
+v0x7f90f54234a0_0 .net "X", 0 0, L_0x7f90f5424650;  1 drivers
+v0x7f90f5423550_0 .net *"_s2", 0 0, L_0x7f90f54246c0;  1 drivers
+v0x7f90f5423600_0 .net *"_s4", 0 0, L_0x7f90f54247a0;  1 drivers
+L_0x7f90f54246c0 .part o0x102995368, 0, 1;
+L_0x7f90f54247a0 .part o0x102995398, 0, 1;
+S_0x7f90f5403560 .scope module, "xor_gate" "xor_gate" 2 19;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "a"
+    .port_info 1 /INPUT 16 "b"
+    .port_info 2 /OUTPUT 1 "c"
+L_0x7f90f5424880 .functor NOT 1, L_0x7f90f5424930, C4<0>, C4<0>, C4<0>;
+L_0x7f90f5424a10 .functor NOT 1, L_0x7f90f5424ac0, C4<0>, C4<0>, C4<0>;
+L_0x7f90f5424ba0 .functor AND 1, L_0x7f90f5424880, L_0x7f90f5424cb0, C4<1>, C4<1>;
+L_0x7f90f5424dd0 .functor AND 1, L_0x7f90f5424a10, L_0x7f90f5424e80, C4<1>, C4<1>;
+L_0x7f90f5424fa0 .functor OR 1, L_0x7f90f5424ba0, L_0x7f90f5424dd0, C4<0>, C4<0>;
+v0x7f90f5423720_0 .net *"_s1", 0 0, L_0x7f90f5424930;  1 drivers
+v0x7f90f54237e0_0 .net *"_s3", 0 0, L_0x7f90f5424ac0;  1 drivers
+v0x7f90f5423880_0 .net *"_s5", 0 0, L_0x7f90f5424cb0;  1 drivers
+v0x7f90f5423930_0 .net *"_s7", 0 0, L_0x7f90f5424e80;  1 drivers
+o0x1029955a8 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f90f54239e0_0 .net "a", 15 0, o0x1029955a8;  0 drivers
+v0x7f90f5423ad0_0 .net "a_not", 0 0, L_0x7f90f5424880;  1 drivers
+o0x102995608 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f90f5423b70_0 .net "b", 15 0, o0x102995608;  0 drivers
+v0x7f90f5423c20_0 .net "b_not", 0 0, L_0x7f90f5424a10;  1 drivers
+v0x7f90f5423cc0_0 .net "c", 0 0, L_0x7f90f5424fa0;  1 drivers
+v0x7f90f5423dd0_0 .net "x", 0 0, L_0x7f90f5424ba0;  1 drivers
+v0x7f90f5423e60_0 .net "y", 0 0, L_0x7f90f5424dd0;  1 drivers
+L_0x7f90f5424930 .part o0x1029955a8, 0, 1;
+L_0x7f90f5424ac0 .part o0x102995608, 0, 1;
+L_0x7f90f5424cb0 .part o0x102995608, 0, 1;
+L_0x7f90f5424e80 .part o0x1029955a8, 0, 1;
+    .scope S_0x7f90f5406690;
+T_0 ;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %delay 40, 0;
+    %pushi/vec4 17992, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %delay 20, 0;
+    %pushi/vec4 42225, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %delay 20, 0;
+    %pushi/vec4 13448, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %delay 20, 0;
+    %pushi/vec4 51268, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %delay 20, 0;
+    %pushi/vec4 32771, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %delay 20, 0;
+    %pushi/vec4 26315, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %delay 20, 0;
+    %pushi/vec4 19080, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %delay 20, 0;
+    %pushi/vec4 12929, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %delay 20, 0;
+    %pushi/vec4 17, 0, 16;
+    %store/vec4 v0x7f90f5423130_0, 0, 16;
+    %pushi/vec4 4226, 0, 16;
+    %store/vec4 v0x7f90f54231e0_0, 0, 16;
+    %vpi_call 3 30 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x7f90f5406690;
+T_1 ;
+    %delay 10, 0;
+    %vpi_call 3 37 "$display", "                  NOR GATE                   " {0 0 0};
+    %vpi_call 3 38 "$display", "        a        |        b       |  output  |" {0 0 0};
+    %vpi_call 3 39 "$display", " ----------------+----------------+----------+" {0 0 0};
+T_1.0 ;
+    %delay 20, 0;
+    %vpi_call 3 43 "$display", " %16b| %16b |    %1b", v0x7f90f5423130_0, v0x7f90f54231e0_0, v0x7f90f5423290_0 {0 0 0};
+    %jmp T_1.0;
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "./cameronLogicGates.v";
+    "norGate_tb.v";
