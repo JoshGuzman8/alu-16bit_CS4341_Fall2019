@@ -9,7 +9,7 @@ reg    [15:0] tmp;
       if (CLR) 
         tmp = 16'b0000000000000000; 
       else 
-        tmp = tmp + D; 
+        tmp = D; 
     end 
   assign Q = tmp; 
 endmodule 
