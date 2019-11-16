@@ -12,7 +12,7 @@
 `define opSHLEFT 12'b010000000000
 
 
-module mux (sel, res);  
+module decoderMux (sel, res);  
   input [3:0] sel;  
   output [11:0] res;  
   reg [11:0] res;  
