@@ -12,7 +12,7 @@
 `define opSHLEFT 12'b010000000000
 
 
-module muxDecoder (addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset,sel, res);  
+module mainMux (addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset,sel, res);  
 	input[15:0] addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset;
   input [11:0] sel;  
   output [15:0] res;  
