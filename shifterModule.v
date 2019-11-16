@@ -1,5 +1,5 @@
 //Shifter module
-module shifter(a, leftShift, rightShift);
+module shifter(a, clk, leftShift, rightShift);
     input [15:0] a;
     output [15:0] leftShift;
     output [15:0] rightShift;
