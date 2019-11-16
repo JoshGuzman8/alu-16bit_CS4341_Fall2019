@@ -1,8 +1,8 @@
 // This will produce or and nor output
 module orMod(a,b,or_output,nor_output)
     input [15:0] a, b;
-    output or_output;
-    output nor_output;
+    output [15:0] or_output;
+    output [15:0] nor_output;
 
     always(@posedg clk)
 
