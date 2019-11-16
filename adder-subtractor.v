@@ -1,4 +1,4 @@
-module ripple_carry_adder_subtractor(S, C, V, A, B, sel);
+module ripple_carry_adder_subtractor(S, C, Overflow, A, B, sel);
 	output [15:0] Sum;   // The 16-bit sum/difference.
    output 	Carry;   // The 1-bit carry/borrow status.
    output 	Overflow;   // The 1-bit overflow status.
