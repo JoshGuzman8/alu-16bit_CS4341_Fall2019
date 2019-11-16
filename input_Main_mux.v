@@ -13,7 +13,7 @@
 
 
 module mux (add,sub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset,sel, res);  
-  input[15:0] add,sub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG;
+	input[15:0] add,sub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset;
   input [11:0] sel;  
   output [11:0] res;  
   reg [11:0] res;  
