@@ -1,14 +1,12 @@
 //Shifter module
-module shifter(a, sel, outShift);
+module shifter(a, leftShift, rightShift);
     input [15:0] a;
-    input sel;          //sel is the selector and can be 0 or 1 for shift left and right respective
-    output [15:0] outShift;
+    output [15:0] leftShift;
+    output [15:0] rightShift;
 
     always @(posedge clk)
 
-    if(sel == 0)
-        outShift = a << 1;
-    else(sel == 1)
-        outShift = a >> 1;
+    leftShift = a << 1;
+    rightShift = a >> 1;
 
 endmodule
