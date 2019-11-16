@@ -1,13 +1,8 @@
-module andnand_gate (a, b,c, y);
+module andnand_gate (a, b, andout, nandout);
 input [15:0] a, b;
-input c;
-output reg [15:0]y;
-always@(c)
-if (c == 0)
-assign y = a & b;
-else
-assign y = ~(a & b);
-
+output  [15:0] andout, nandout;
+assign andout = a & b;
+assign nandout = ~(a & b);
 endmodule
 
 
