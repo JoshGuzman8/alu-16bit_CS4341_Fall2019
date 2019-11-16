@@ -12,13 +12,12 @@
 `define opSHLEFT 12'b010000000000
 
 
-module mux (add,sub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset,sel, res);  
-	input[15:0] add,sub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset;
+module mux (addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset,sel, res);  
+	input[15:0] addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset;
   input [11:0] sel;  
   output [11:0] res;  
   reg [11:0] res;  
   always @(sel)  
- sub = add;
   begin  
     case (sel)  
       opAND : res = andG;  
@@ -28,8 +27,8 @@ module mux (add,sub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset,sel
       opNAND : res = nAndG;  
       opNOR: res = nOrG;  
       opNOR: res = xNorG; 
-	  opADD: res = add; 
-	  opSUB: res = sub;
+	  opADD: res = addsub; 
+	  opSUB: res = addsub;
 	  opSHRIGHT: res = shRight;
 	  opSHRIGHT: res = shLeft;
       default : res = reset;  
