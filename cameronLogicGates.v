@@ -1,18 +1,14 @@
-// NOT FINISHED
-module or_gate(a, b, out) ;
-input [15:0] a ;
-input [15:0] b ;
-output out ;
-wire out ;
-assign out =a[0]|a[1]|a[2] ;
-endmodule
+// This will produce or and nor output
+module orMod(a,b,or_output,nor_output)
+    input [15:0] a, b;
+    output or_output;
+    output nor_output;
 
-// FINISHED
-module nor_gate (a, b, y);
-input [15:0] a, b;
-output y;
+    always(@posedg clk)
 
-assign y = ~(a | b);
+    assign or_output = (a | b);
+    assign nor_output = ~(a | b);
+        
 endmodule
 
 // FINISHED
