@@ -15,7 +15,7 @@
 module muxDecoder (addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset,sel, res);  
 	input[15:0] addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,reset;
   input [11:0] sel;  
-  output [11:0] res;  
+  output [15:0] res;  
   reg [11:0] res;  
   always @(sel)  
   begin  
