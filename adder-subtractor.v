@@ -52,24 +52,24 @@ module ripple_carry_adder_subtractor(S, C, V, A, B, Op);
    // A+B when Op==0, and A+not(B)+1 when Op==1.
    // Note that not(B)+1 is the 2's complement of B, so
    // this gives us subtraction.     
-   xor(B0, B[0], Op);
-   xor(B1, B[1], Op);
-   xor(B2, B[2], Op);
-   xor(B3, B[3], Op);
-   xor(B4, B[4], Op);
-   xor(B5, B[5], Op);
-   xor(B6, B[6], Op);
-   xor(B7, B[7], Op);
-   xor(B8, B[8], Op);
-   xor(B0, B[9], Op);
-   xor(B1, B[10], Op);
-   xor(B2, B[11], Op);
-   xor(B3, B[12], Op);
-   xor(B0, B[13], Op);
-   xor(B1, B[14], Op);
-   xor(B2, B[15], Op);
-   xor(C, C15, Op);     // Carry = C3 for addition, Carry = not(C3) for subtraction.
-   xor(V, C15, C14);     // If the two most significant carry output bits differ, then we have an overflow.
+   	xor(B0, B[0], Op);
+   	xor(B1, B[1], Op);
+   	xor(B2, B[2], Op);
+   	xor(B3, B[3], Op);
+   	xor(B4, B[4], Op);
+   	xor(B5, B[5], Op);
+   	xor(B6, B[6], Op);
+   	xor(B7, B[7], Op);
+   	xor(B8, B[8], Op);
+   	xor(B9, B[9], Op);
+   	xor(B10, B[10], Op);
+	xor(B11, B[11], Op);  
+	xor(B12, B[12], Op);
+	xor(B13, B[13], Op);
+	xor(B14, B[14], Op);
+	xor(B15, B[15], Op);
+  	xor(C, C15, Op);     // Carry = C3 for addition, Carry = not(C3) for subtraction.
+   	xor(V, C15, C14);     // If the two most significant carry output bits differ, then we have an overflow.
    
    full_adder fa0(S[0], C0, A[0], B0, Op);    // Least significant bit.
    full_adder fa1(S[1], C1, A[1], B1, C0);
