@@ -1,6 +1,18 @@
 //=============================================
-// Include files
+// Team members: Josh Guzman, Albey Kappil,
+//		 Bowen Jiang, Cameron Buchman,
+//		 Swamy Singaravelu
+// Project:	 16-bit ALU
+// Date:	 11/17/19
+// Language: 	 iVerilog
+//
+// Description:
+//	This project simulates a 16-bit ALU in
+//	verilog behaviorally.
 //=============================================
+
+
+// Include files
 `include "controlLogicModule.v" 
 `include "DFFModule.v"
 `include "AND_NAND_modules.v"
@@ -14,7 +26,8 @@
 
 
 //=============================================
-// Breadboard
+// Breadboard:
+// Modules, wires, regs have been instantiated here
 //=============================================
 module Breadboard(a,b,opcode,clk,select);
 
