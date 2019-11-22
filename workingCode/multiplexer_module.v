@@ -37,7 +37,7 @@ module muxSel (addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,sel, re
       output [15:0] res;  
       reg [15:0] res;  
 
-  always @(sel)  
+  always @(addsub or shRight or shRight or shLeft or andG or orG or xOrG or xNorG or nAndG or nOrG or notG or reset)  
   begin  
     case (sel)  
       selAND : res = andG;  
