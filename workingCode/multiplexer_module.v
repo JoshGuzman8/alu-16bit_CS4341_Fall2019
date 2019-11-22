@@ -1,6 +1,15 @@
-//=============================================
-// Multiplexer module
-//=============================================
+/*=============================================
+  Multiplexer module
+  Author: Albey Kappil
+  
+  Description:
+        A Multiplexer module with 12 channels of
+        16-bit input from the output of each of 
+        the operation modules of the ALU. this 
+        module uses a one-hot input select from 
+        the controlLogic to choose between the 
+        channels to output a 16bit solution. 
+*/=============================================
 module muxSel (addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,sel, res);
 
     //---------------------------------------------
