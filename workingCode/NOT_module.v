@@ -1,5 +1,5 @@
 //=============================================
-//  accumulator module
+//  Not module
 //  Author: Bowen Jiang
 //
 //  Description: 
