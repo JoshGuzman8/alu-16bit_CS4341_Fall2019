@@ -1,3 +1,25 @@
+/*===============================================
+
+  adder-subtractor Module 
+
+  Author: Swamy Singaravelu
+
+  
+
+  Description: 
+
+  	This module that take an input of A and B and a select
+	
+	bit that determines if operation will be addition or
+	
+	subtraction  and outputs the sum or difference, 
+
+	carry, and overflow of the operation.
+
+=================================================
+
+*/
+
 module adder-subber(Sum, Carry, Overflow, A, B, sel);
 
          output [15:0] Sum;   // The 16-bit sum/difference.
