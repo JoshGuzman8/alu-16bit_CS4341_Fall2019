@@ -34,7 +34,7 @@ module xnorMod(a, b, clk, xnor_output);
         
         reg [15:0] reg_xnor_output;
 
-    always @(posedge clk) begin
+    always @(*) begin
         reg_xnor_output = ~(a ^ b);    
     end
     
