@@ -9,7 +9,7 @@
         module uses a one-hot input select from 
         the controlLogic to choose between the 
         channels to output a 16bit solution. 
-*/=============================================
+============================================= */
 module muxSel (addsub,shRight,shLeft,andG,orG,xOrG,xNorG,nAndG,nOrG,notG,sel, res);
 
     //---------------------------------------------
