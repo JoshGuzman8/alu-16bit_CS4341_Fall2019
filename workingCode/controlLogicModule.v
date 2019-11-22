@@ -1,6 +1,14 @@
-//=============================================
-// controlLogic
-//=============================================
+/*===============================================
+  controlLogic Module 
+  Author: Albey Kappil
+  
+  Description: 
+  	This module that take a input of 4-bit 
+	opocode representing the operation taking
+  	place and outputs a one-hot number 
+	representing the inputed opcode.
+=================================================
+*/
 module controlLogic (opCode, sel);  
 
   //---------------------------------------------
