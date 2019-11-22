@@ -21,7 +21,7 @@ module and_gate (a, b, clk, andout);
         output [15:0] andout;
         reg [15:0] reg_andout;
 
-    always @(posedge clk) begin
+    always @(*) begin
         reg_andout = a & b;
 
     end
@@ -42,7 +42,7 @@ module nand_gate (a, b, clk, nandout);
         output [15:0] nandout;
         reg [15:0] reg_nandout;
 
-    always @(posedge clk) begin
+    always @(*) begin
         reg_nandout = ~(a & b);
     end
 
