@@ -12,7 +12,7 @@ module xorMod(a, b, clk, xor_output);
         
         reg [15:0] reg_xor_output;
 
-    always @(posedge clk) begin
+    always @(*) begin
         reg_xor_output = a ^ b;    
     end
     
