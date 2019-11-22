@@ -10,7 +10,7 @@ module orMod(a, b, clk, or_output);
         output [15:0] or_output;
         reg [15:0] reg_or_output;
 
-    always @(posedge clk) begin
+    always @(*) begin
         reg_or_output = (a | b);   
     end
     
