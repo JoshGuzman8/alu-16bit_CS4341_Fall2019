@@ -1,33 +1,21 @@
 //=============================================
-// Team members: Josh Guzman, Albey Kappil,
-//		 Bowen Jiang, Cameron Buchman,
-//		 Swamy Singaravelu
-// Project:	 16-bit ALU
-// Date:	 11/17/19
-// Language: 	 iVerilog
-//
-// Description:
-//	This project simulates a 16-bit ALU in
-//	verilog behaviorally.
-//=============================================
-
-
 // Include files
+//=============================================
 `include "controlLogicModule.v" 
-`include "DFFModule.v"
+`include "multiplexer_module_to_reg.v"
+`include "registerModule.v"
 `include "AND_NAND_modules.v"
 `include "OR_NOR_modules.v"
 `include "XOR_XNOR_modules.v"
 `include "NOT_module.v"
 `include "adder_module.v"
 `include "shifter_module.v"
-`include "multiplexer_module.v"
+`include "multiplexer_module_out_selector.v"
 `include "accum_module.v"
 
 
 //=============================================
-// Breadboard:
-// Modules, wires, regs have been instantiated here
+// Breadboard
 //=============================================
 module Breadboard(a,b,opcode,clk,select);
 
@@ -40,8 +28,10 @@ module Breadboard(a,b,opcode,clk,select);
     output [11:0] select;
 
     wire [11:0] select;
-    wire [15:0] dff_a_out;
-    wire [15:0] dff_b_out;
+    wire [15:0] mux_a_out;
+    wire [15:0] mux_b_out;
+    wire [15:0] reg_a_out;
+    wire [15:0] reg_b_out;
     wire [15:0] and_out, nand_out;
     wire [15:0] or_output, nor_output;
     wire [15:0] xor_output,xnor_output;
@@ -61,20 +51,22 @@ module Breadboard(a,b,opcode,clk,select);
   //Instantiate modules
   //---------------------------------------------
     controlLogic cL (opcode, select);
-    DFF dff_a (clk, a, dff_a_out);
-    DFF dff_b (clk, b, dff_b_out);
-    and_gate AND (a, b, clk, and_out);
-    nand_gate NAND (a, b, clk, nand_out);
-    orMod OR (a, b, clk, or_output);
-    norMod NOR (a, b, clk, nor_output);
-    xorMod XOR (a, b, clk, xor_output);
-    xnorMod XNOR (a, b, clk, xnor_output);
-    not_gate NOT (a, clk, not_out);
-    ripple_carry_adder_subtractor rpc_adder_sub (addsub_out, carry, overflow, a, b, select[8]);
-    shifter shift (a, clk, shLeft_out, shRight_out);
-    muxSel mux (addsub_out ,shRight_out, shLeft_out, and_out, or_output, xor_output,
+    muxInput mux_a (a, select[11], mux_a_out);
+    muxInput mux_b (a, select[11], mux_b_out);
+    register reg_a (clk, mux_a_out, reg_a_out);
+    register reg_b (clk, mux_b_out, reg_b_out);
+    and_gate AND (reg_a_out, reg_b_out, and_out);
+    nand_gate NAND (reg_a_out, reg_b_out, nand_out);
+    orMod OR (reg_a_out, reg_b_out, or_output);
+    norMod NOR (reg_a_out, reg_b_out, nor_output);
+    xorMod XOR (reg_a_out, reg_b_out, xor_output);
+    xnorMod XNOR (reg_a_out, reg_b_out, xnor_output);
+    not_gate NOT (reg_a_out, not_out);
+    ripple_carry_adder_subtractor rpc_adder_sub (addsub_out, carry, overflow, reg_a_out, reg_b_out, select[8]);
+    shifter shift (reg_a_out, shLeft_out, shRight_out);
+    muxSel muxSelector (addsub_out ,shRight_out, shLeft_out, and_out, or_output, xor_output,
                 xnor_output, nand_out, nor_output, not_out, select, mux_out);
-    accum accumulater (mux_out, finalOutput, clk);
+    accum accumulater (mux_out, finalOutput);
 
 
 endmodule //end of Breadboard
@@ -121,9 +113,9 @@ module Testbench() ;
       begin
       forever
         begin
-            #1 
+            #5
             clk = 0 ;
-            #1
+            #5
             clk = 1 ;
         end
     end	
@@ -135,12 +127,12 @@ module Testbench() ;
   //---------------------------------------------
     initial
       begin
-      #15 ///Offset the Square Wave
+       #11///Offset the Square Wave
         $display("             A            |             B            |      OPCODE      |          OUTPUT          |");
         $display("--------------------------+--------------------------+------------------+--------------------------|");
       forever
         begin
-        #10 $write(" %16b \(%5d\) | %16b \(%5d\) |  %4b  ", a , a,  b, b, opcode);  
+          #2 $write(" %16b \(%5d\) | %16b \(%5d\) |  %4b  ", ALU.mux_a_out , ALU.mux_a_out,  ALU.mux_b_out, ALU.mux_b_out, opcode);  
                 case (opcode)  
                   opAND :  $write(" \(   AND\) ");  
                   opOR :   $write(" \(    OR\) ");  
@@ -156,7 +148,7 @@ module Testbench() ;
                   opCLEAR : $write(" \( Clear\) ");
                   default : $write(" \( Clear\) ");  
                 endcase
-        #20 $display("| %16b \(%5d\) |", ALU.finalOutput, ALU.finalOutput);          //Delay output for clock to update output
+        #3 $display("| %16b \(%5d\) ", ALU.finalOutput, ALU.finalOutput);          //Delay output for clock to update output
         end
     end	
    
@@ -166,20 +158,31 @@ module Testbench() ;
   //---------------------------------------------   
     initial 
     begin
-        #12 //Offset the Square Wave
-        #10 opcode = opAND;     a = 16'b1100000000000001; b = 16'b1000000000000001;
-        #30 opcode = opOR;      a = 16'b0000000000000010; b = 16'b0000000000000001;
-        #30 opcode = opNOT;     a = 16'b0100000000000010;
-        #30 opcode = opXOR;     a = 16'b0100000000000010; b = 16'b0000000000000011;
-        #30 opcode = opNAND;    a = 16'b0000000000000010;
-        #30 opcode = opNOR;     a = 16'b0000000000000010; b = 16'b0000000000000011;
-        #30 opcode = opXNOR;    a = 16'b0000000000000010; b = 16'b0000000000000011;
-        #30 opcode = opADD;     a = 16'b0000000000000010; b = 16'b0000000000000011;
-        #30 opcode = opSUB;     a = 16'b0000000000000010; b = 16'b0000000000000011;
-        #30 opcode = opSHRIGHT; a = 16'b0000000000001000; b = 16'b0000000000000000;
-        #30 opcode = opSHLEFT;  a = 16'b0000000010000000; b = 16'b0000000000000000;
-        #30 opcode = opCLEAR;	
-        #30
+    //Offset the Square Wave
+        #12 opcode = opAND;     a = 16'b0000000000001010; b = 16'b0000000000000011;
+        #5 opcode = opCLEAR;
+        #5 opcode = opOR;      a = 16'b0000000000000011; b = 16'b0000000000000001;
+        #5 opcode = opCLEAR;   
+        #5 opcode = opNOR;     a = 16'b0000000000000011; b = 16'b0000000000000001;
+        #5 opcode = opCLEAR;
+        #5 opcode = opNOT;     a = 16'b0100000000000010; b = 16'bxxxxxxxxxxxxxxxx;
+        #5 opcode = opCLEAR;
+        #5 opcode = opXOR;     a = 16'b0100000000000010; b = 16'b0000000000000011;
+        #5 opcode = opCLEAR;
+        #5 opcode = opNAND;    a = 16'b0000000000000010;
+        #5 opcode = opCLEAR;
+        #5 opcode = opNOR;     a = 16'b0000000000000010; b = 16'b0000000000000011;
+        #5 opcode = opCLEAR;
+        #5 opcode = opXNOR;    a = 16'b0000000000000110; b = 16'b0000000000000011;
+        #5 opcode = opCLEAR;
+        #5 opcode = opSHRIGHT; a = 16'b0000000000000010; b = 16'bxxxxxxxxxxxxxxxx;
+        #5 opcode = opCLEAR;
+        #5 opcode = opSHLEFT;  a = 16'b0000000000000010; b = 16'bxxxxxxxxxxxxxxxx;
+        #5 opcode = opCLEAR;
+        #5 opcode = opADD;     a = 16'b0000000000000010; b = 16'b0000000000000011;
+        #5 opcode = opCLEAR;
+        #5 opcode = opSUB;     a = 16'b0000000000000110; b = 16'b0000000000000011;
+        #5 opcode = opCLEAR;	
       
       $finish;
     end
