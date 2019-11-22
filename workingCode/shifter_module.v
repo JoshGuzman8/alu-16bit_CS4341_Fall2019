@@ -19,7 +19,7 @@ module shifter(a, clk, leftShift, rightShift);
     
         reg [15:0] reg_leftShift, reg_rightShift;   //reg to hold primatives to pass to wire
 
-    always @(posedge clk) begin
+    always @(*) begin
         reg_leftShift = a << 1;
         reg_rightShift = a >> 1;
     end
