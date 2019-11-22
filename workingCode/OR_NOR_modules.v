@@ -30,7 +30,7 @@ module norMod(a, b, clk, nor_output);
         output [15:0] nor_output;
         reg [15:0] reg_or_output, reg_nor_output;
 
-    always @(posedge clk) begin
+    always @(*) begin
         reg_nor_output = ~(a | b);
     end
     
