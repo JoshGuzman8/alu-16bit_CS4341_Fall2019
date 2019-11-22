@@ -21,7 +21,7 @@ module not_gate (a,clk, notout);
   
     reg [15:0] reg_notout;
   
-    always @(posedge clk) begin
+    always @(*) begin
         reg_notout = ~a ;
     end
 
