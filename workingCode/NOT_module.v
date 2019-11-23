@@ -11,12 +11,11 @@
 //=============================================
 // Not module
 //=============================================
-module not_gate (a,clk, notout);
+module not_gate (a, notout);
     //---------------------------------------------
     //Inputs/Outputs/regs
     //---------------------------------------------
     input [15:0] a;
-    input clk;
     output [15:0] notout;
   
     reg [15:0] reg_notout;
