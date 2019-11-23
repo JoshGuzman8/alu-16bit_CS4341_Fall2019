@@ -37,7 +37,7 @@ module Breadboard(a,b,opcode,clk,select);
     wire [15:0] xor_output,xnor_output;
     wire [15:0] not_out;
     wire [15:0] addsub_out; 
-    wire [15:0] shLeft_out, shRight_out;
+	wire [15:0] shLeft_out, shRight_out;
     wire [15:0] mux_out;
     wire carry;
     wire overflow;
