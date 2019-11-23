@@ -20,18 +20,13 @@
 
 */
 
-module adder-subber(Sum, Carry, Overflow, A, B, sel);
+module adder_subber(Sum, Carry, Overflow, A, B, sel);
 
-         output [15:0] Sum;   // The 16-bit sum/difference.
-
+        output [15:0] Sum;   // The 16-bit sum/difference.
         output 	Carry;   // The 1-bit carry/borrow status.
-
-        output 	Overflow;   // The 1-bit overflow status.
-
+		output Overflow;
         input [15:0] 	A;   // The 16-bit augend/minuend.
-
         input [15:0] 	B;   // The 16-bit addend/subtrahend.
-
         input 	sel;  // The operation: 0 => Add, 1=>Subtract.
         
         reg [15:0] Sum;
@@ -54,5 +49,6 @@ module adder-subber(Sum, Carry, Overflow, A, B, sel);
 	end
     
     assign Carry = o_Sum[16];
+	assign Overflow = Carry;
         
 endmodule 
