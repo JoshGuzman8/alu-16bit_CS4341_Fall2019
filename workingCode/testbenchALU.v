@@ -12,6 +12,7 @@
 `include "shifter_module.v"
 `include "multiplexer_module_out_selector.v"
 `include "accum_module.v"
+`include "adder2.v"
 
 
 //=============================================
@@ -50,7 +51,7 @@ module Breadboard(a,b,opcode,clk,select);
   //---------------------------------------------
   //Instantiate modules
   //---------------------------------------------
-    controlLogic cL (opcode, select);
+    controlLogic controlLogic (opcode, select);
     muxInput mux_a (a, select[11], mux_a_out);
     muxInput mux_b (b, select[11], mux_b_out);
     register reg_a (clk, mux_a_out, reg_a_out);
@@ -62,7 +63,7 @@ module Breadboard(a,b,opcode,clk,select);
     xorMod XOR (reg_a_out, reg_b_out, xor_output);
     xnorMod XNOR (reg_a_out, reg_b_out, xnor_output);
     not_gate NOT (reg_a_out, not_out);
-    ripple_carry_adder_subtractor Add_Sub (addsub_out, carry, overflow, reg_a_out, reg_b_out, select[8]);
+    adder_subber add_sub (addsub_out, carry, overflow, reg_a_out, reg_b_out, select[7]);
     shifter Shifter (reg_a_out, shLeft_out, shRight_out);
     muxSel muxSelector (addsub_out ,shRight_out, shLeft_out, and_out, or_output, xor_output,
                 xnor_output, nand_out, nor_output, not_out, select, mux_out);
@@ -128,8 +129,8 @@ module Testbench() ;
     initial
       begin
        #11///Offset the Square Wave
-        $display("             A            |             B            |      OPCODE      |          OUTPUT          | overflow? |");
-        $display("--------------------------+--------------------------+------------------+--------------------------+-----------|");
+        $display("             A            |             B            |      OPCODE      |          OUTPUT          | Next State |");
+        $display("--------------------------+--------------------------+------------------+--------------------------+------------|");
       forever
         begin
           #2 $write(" %16b \(%5d\) | %16b \(%5d\) |  %4b  ", ALU.mux_a_out , ALU.mux_a_out,  ALU.mux_b_out, ALU.mux_b_out, opcode);  
@@ -149,7 +150,12 @@ module Testbench() ;
                   default : $write(" \( Clear\) ");  
                 endcase
         #3 $write("| %16b \(%5d\) ", ALU.finalOutput, ALU.finalOutput);          //Delay output for clock to update output
-           $display("|      %1b     ", ALU.overflow);
+            if((opcode == opADD || opcode == opSUB) & ALU.overflow)begin
+              $display("|    ERROR   |");
+            end
+            else begin
+              $display("|    Ready   |");
+              end
         end
     end	
    
@@ -182,6 +188,8 @@ module Testbench() ;
         #5 opcode = opCLEAR;
         #5 opcode = opADD;     a = 16'b1011110001000000; b = 16'b1001110001000000;
         #5 opcode = opCLEAR;
+        #5 opcode = opSUB;     a = 16'b0000000000000111; b = 16'b0000000000011110;
+        #5 opcode = opCLEAR;	
         #5 opcode = opSUB;     a = 16'b0000000000011110; b = 16'b0000000000000111;
         #5 opcode = opCLEAR;	
       
