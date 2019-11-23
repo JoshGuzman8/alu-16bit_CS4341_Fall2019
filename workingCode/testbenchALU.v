@@ -8,11 +8,10 @@
 `include "OR_NOR_modules.v"
 `include "XOR_XNOR_modules.v"
 `include "NOT_module.v"
-`include "adder_module.v"
+`include "adderModule.v"
 `include "shifter_module.v"
 `include "multiplexer_module_out_selector.v"
 `include "accum_module.v"
-`include "adder2.v"
 
 
 //=============================================
