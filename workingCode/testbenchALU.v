@@ -62,7 +62,7 @@ module Breadboard(a,b,opcode,clk,select);
     xorMod XOR (reg_a_out, reg_b_out, xor_output);
     xnorMod XNOR (reg_a_out, reg_b_out, xnor_output);
     not_gate NOT (reg_a_out, not_out);
-    adder_subber add_sub (addsub_out, carry, overflow, reg_a_out, reg_b_out, select[7]);
+    adder_subber Add_Sub (addsub_out, carry, overflow, reg_a_out, reg_b_out, select[7]);
     shifter Shifter (reg_a_out, shLeft_out, shRight_out);
     muxSel muxSelector (addsub_out ,shRight_out, shLeft_out, and_out, or_output, xor_output,
                 xnor_output, nand_out, nor_output, not_out, select, mux_out);
