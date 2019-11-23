@@ -1,5 +1,5 @@
 //=============================================
-// Register
+// DFF
 //=============================================
 module register(clk,in,out);
   //---------------------------------------------
@@ -10,6 +10,7 @@ module register(clk,in,out);
     output [15:0] out;
     reg    [15:0] out;
   
-  always @(posedge clk)//<--This is the statement that makes the circuit behave with TIME
+  always @(clk) begin//<--This is the statement that makes the circuit behave with TIME
   out = in;
+  end
 endmodule
