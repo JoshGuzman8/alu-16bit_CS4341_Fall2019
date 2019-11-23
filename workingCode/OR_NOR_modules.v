@@ -32,7 +32,7 @@ endmodule
 //      and will return one 16-bit number, as long
 //      as neither A or B are valid.
 //=============================================
-module norMod(a, b, nor_output);
+module norMod(a, b,nor_output);
     //---------------------------------------------
     //Inputs/Outputs/regs
     //---------------------------------------------
