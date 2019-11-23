@@ -8,12 +8,11 @@
 //      the number on the positive edge of the
 //      clock.
 //=============================================
-module shifter(a, clk, leftShift, rightShift);
+module shifter(a, leftShift, rightShift);
     //---------------------------------------------
     //Inputs/Outputs/regs
     //---------------------------------------------
-        input [15:0] a;             //16-bit number
-        input clk;                  //1-bit clock
+        input [15:0] a;             //16-bit number                  //1-bit clock
         output [15:0] leftShift;    //a shifted to left
         output [15:0] rightShift;   //a shifted to right
     
