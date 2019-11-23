@@ -2,6 +2,8 @@
 // adder module
 //=============================================
 module ripple_carry_adder_subtractor(Sum, Carry, Overflow, A, B, sel);
+      
+
     //---------------------------------------------
     //Inputs/Outputs/regs
     //---------------------------------------------
