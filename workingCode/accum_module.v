@@ -20,7 +20,7 @@ module accum (D, Q);
         reg    [15:0] tmp;  
         reg [15:0] reg_Q;
 
-    always @(posedge clk) begin
+    always @(*) begin
         tmp = D;  
         reg_Q = tmp; 
     end 
