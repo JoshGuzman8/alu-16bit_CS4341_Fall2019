@@ -12,12 +12,11 @@
 //=============================================
 // AND module
 //=============================================
-module and_gate (a, b, clk, andout);
+module and_gate (a, b, andout);
     //---------------------------------------------
     //Inputs/Outputs/regs
     //---------------------------------------------
         input [15:0] a, b;
-        input clk;
         output [15:0] andout;
         reg [15:0] reg_andout;
 
@@ -33,12 +32,11 @@ endmodule
 //=============================================
 // NAND module
 //=============================================
-module nand_gate (a, b, clk, nandout);
+module nand_gate (a, b, nandout);
     //---------------------------------------------
     //Inputs/Outputs/regs
     //---------------------------------------------
         input [15:0] a, b;
-        input clk;
         output [15:0] nandout;
         reg [15:0] reg_nandout;
 
